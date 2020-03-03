@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   });
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`CapstoneDev-C started on port ${port}`);
 });

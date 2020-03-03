@@ -5,7 +5,9 @@
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^7.18.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -27,6 +29,7 @@
   "scripts": {
     "test": "mocha --recursive --require babel-register --require babel-polyfill test --exit",
     "start": "nodemon --exec babel-node app.js",
+    "create-table": " babel-node db/createTable.js",
     "debug": "babel-node debug app.js"
   },
   "repository": {

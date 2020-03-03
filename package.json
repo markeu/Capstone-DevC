@@ -27,10 +27,11 @@
     "request": "^2.88.2"
   },
   "scripts": {
-    "test": "mocha --recursive --require babel-register --require babel-polyfill test --exit",
+    "test": "npm run drop-table &&  npm run create-table && mocha --recursive --require babel-register --require babel-polyfill test --exit",
     "start": "nodemon --exec babel-node app.js",
     "create-table": " babel-node database/createTable.js",
     "drop-table": " babel-node database/dropTable.js",
+    "lint": "node_modules/.bin/eslint --fix src/**/*.js",
     "debug": "babel-node debug app.js"
   },
   "repository": {

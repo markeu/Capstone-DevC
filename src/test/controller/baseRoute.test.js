@@ -1,15 +1,14 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 
-import app from '../../app';
+import app from '../../../app';
 
 chai.use(chaiHttp);
 const { should, expect } = chai;
 chai.should();
 should();
 
-
-describe('Test for landing page and USER sign-in/sign-up', () => {
+describe('Base route ', () => {
   it('should return 200 success status', (done) => {
     chai.request(app).get('/').end((_err, res) => {
       expect(res).to.have.status(200);

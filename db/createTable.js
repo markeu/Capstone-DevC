@@ -30,4 +30,3 @@ const createTable = () => {
 
 
 createTable();
-

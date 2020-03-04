@@ -11,7 +11,7 @@ const errorResponse = (res, status, message) => {
   res.status(status).json({ status, error: message });
 };
 
-const successResposnse = (res, status, message = null, payload = null) => {
+const successResponse = (res, status, message = null, payload = null) => {
   res.status(status).json({
     status: statusRes[status],
     data: {
@@ -29,4 +29,4 @@ const successResponseArray = (res, status, arrayData) => {
   res.status(status).json(response);
 };
 
-export { errorResponse, successResposnse, successResponseArray };
+export { errorResponse, successResponse, successResponseArray };

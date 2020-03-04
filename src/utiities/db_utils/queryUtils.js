@@ -6,7 +6,7 @@ export const getColumns = (data) => {
       if (index >= data.length - 1) {
         columns += `$${index + 1}`;
       } else {
-        columns += `$${index + 1}`;
+        columns += `$${index + 1},`;
       }
     });
   } catch (error) {
@@ -15,4 +15,3 @@ export const getColumns = (data) => {
 
   return columns;
 };
-

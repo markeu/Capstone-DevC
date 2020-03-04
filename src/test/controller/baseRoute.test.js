@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 
-import app from '../../../app';
+import app from '../../app';
 
 chai.use(chaiHttp);
 const { should, expect } = chai;
@@ -13,7 +13,7 @@ describe('Base route ', () => {
     chai.request(app).get('/').end((_err, res) => {
       expect(res).to.have.status(200);
       res.body.should.be.a('object');
-      expect(res.body.message).to.equal('Welcome to CapstoneDev-C');
+      expect(res.body.message).to.equal('Welcome to TeamWork');
       done();
     });
   });

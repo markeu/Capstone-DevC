@@ -31,7 +31,7 @@
     "uuid": "^3.3.3"
   },
   "scripts": {
-    "test": "npm run drop-table &&  npm run create-table && mocha --recursive --require babel-register --require babel-polyfill test --exit",
+    "test": "npm run drop-table &&  npm run create-table && mocha --recursive --require babel-register --require babel-polyfill src/test --exit",
     "start": "nodemon --exec babel-node src/app.js",
     "create-table": " babel-node src/database/createTable.js",
     "drop-table": " babel-node src/database/dropTable.js",

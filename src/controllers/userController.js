@@ -59,9 +59,8 @@ export default class UserController {
       if (createError) {
         throw new Error(createError);
       }
-      
+
       const { password: ignored, ...rest } = newUser;
-      console.log(newUser, '......<>');
       const token = await generateToken({ userId: rest.id, firstName, lastName });
       const response = {
         ...rest,

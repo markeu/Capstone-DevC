@@ -44,11 +44,11 @@ class Authenticate {
   * @param  {function} next - The next() Function
   * @returns {String} next() if valid secret
   */
-  static async verifyRootUser(res, req, next) {
+  static async verifyRootUser(req, res, next) {
     const { secret } = req.body;
     const savedSecret = process.env.ROOT_USER;
     if (secret === savedSecret) {
-      res.body.userRole = 'admin';
+      req.body.userRole = 'admin';
       return next();
     }
     return errorResponse(res, 403, 'Not allowed');

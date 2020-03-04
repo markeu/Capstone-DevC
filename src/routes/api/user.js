@@ -7,6 +7,6 @@ const { registerUser } = UserController;
 
 const router = express.Router();
 
-router.post('/create-user-root', registerUser);
+router.post('/create-user-root', verifyRootUser, registerUser);
 
 export default router;

@@ -36,4 +36,3 @@ export default class Jwt {
     return decoded;
   }
 }
-

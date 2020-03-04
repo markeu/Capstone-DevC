@@ -27,13 +27,14 @@
     "eslint-plugin-import": "^2.20.1",
     "mocha": "^7.1.0",
     "nodemon": "^2.0.2",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "uuid": "^3.3.3"
   },
   "scripts": {
     "test": "npm run drop-table &&  npm run create-table && mocha --recursive --require babel-register --require babel-polyfill test --exit",
-    "start": "nodemon --exec babel-node app.js",
-    "create-table": " babel-node database/createTable.js",
-    "drop-table": " babel-node database/dropTable.js",
+    "start": "nodemon --exec babel-node src/app.js",
+    "create-table": " babel-node src/database/createTable.js",
+    "drop-table": " babel-node src/database/dropTable.js",
     "lint": "node_modules/.bin/eslint --fix src/**/*.js",
     "debug": "babel-node debug app.js"
   },

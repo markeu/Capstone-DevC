@@ -15,6 +15,7 @@ const tablesQuerry = `
       "address" VARCHAR(128) NOT NULL,
       "avaterUrl" VARCHAR(128),
       "userRole" VARCHAR(128),
+      "secret" VARCHAR(128),
       UNIQUE(email)
     );
 

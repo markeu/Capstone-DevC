@@ -1,6 +1,7 @@
 /* eslint-disable valid-jsdoc */
 
 import { verifyToken, errorResponse } from '../utiities';
+import { getItem } from '../database/query/helper';
 
 /**
  * @class Authenticate
@@ -8,6 +9,26 @@ import { verifyToken, errorResponse } from '../utiities';
  * @exports Authenticate
  */
 class Authenticate {
+/**
+* Verifies a user is admin
+* @param  {object} req - The user request object
+* @param  {object} res - The user res response object
+* @param  {function} next - The next() Function
+* @returns {String} next() if user is admin and error if user is not
+*/
+  static async verifyAdmin(req, res, next) {
+    const { user } = req;
+    try {
+      const { error: ignored, result: foundUser } = await getItem('users', { id: user.userId });
+      if (foundUser.userRole === 'admin') {
+        return next();
+      }
+      return errorResponse(res, 401, 'Access denied, only admins');
+    } catch (error) {
+      return errorResponse(res, 401, 'Access denied. We could not verify user');
+    }
+  }
+
   /**
    * Verify if token is valid
    * @param  {object} req - The user request object
@@ -15,7 +36,7 @@ class Authenticate {
    * @param  {function} next - The next() Function
    * @returns {String} req.userId - The user id
    */
-  static async verifyToken(res, req, next) {
+  static async verifyToken(req, res, next) {
     try {
       const { headers: { authorization } } = req;
       if (authorization === undefined) throw new Error('no auth');
@@ -24,11 +45,11 @@ class Authenticate {
         return errorResponse(res, 401, 'Access denied');
       }
       const decoded = await verifyToken(token);
-      if (!decoded && decoded.userId) {
+      if (!(decoded && decoded.userId)) {
         return errorResponse(res, 401, 'Access denied. We could not verify user');
       }
       req.user = decoded;
-      next();
+      return next();
     } catch (error) {
       if (error.message === 'no auth' || error.message === 'jwt expired') {
         return errorResponse(res, 401, 'Authorisation failed');

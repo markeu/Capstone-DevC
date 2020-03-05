@@ -40,7 +40,6 @@ export default class UserController {
       if (result) {
         return errorResponse(res, 409, 'user already exists');
       }
-      
       const { error: createError, result: newUser } = await createItem('users', {
         id,
         firstName,
@@ -55,12 +54,12 @@ export default class UserController {
         userRole: userRole ? userRole.toLowerCase() : 'employee',
         avaterUrl: avaterUrl || 'none',
       });
-      
       if (createError) {
         throw new Error(createError);
       }
 
       const { password: ignored, ...rest } = newUser;
+     
       const token = await generateToken({ userId: rest.id, firstName, lastName });
       const response = {
         ...rest,

@@ -28,3 +28,14 @@ export const userRegister = [
     .trim(),
   body('email', 'Please provide a valid email').isEmail().isLength({ min: 3, max: 250 }).trim(),
 ];
+
+export const loginUser = [
+  body('email').not().isEmpty()
+    .isEmail()
+    .withMessage('Provide your Email')
+    .trim(),
+  body('password').not().isEmpty()
+    .isString()
+    .withMessage('Provide your password')
+    .trim()
+];

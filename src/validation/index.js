@@ -1,9 +1,10 @@
 /* eslint-disable import/prefer-default-export */
-import { userRegister } from './rules';
+import { userRegister, loginUser } from './rules';
 
 export const validationFetch = (validationName) => {
   const rules = {
-    userRegister
+    userRegister,
+    loginUser
   };
 
   return rules[validationName];

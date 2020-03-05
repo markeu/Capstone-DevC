@@ -4,12 +4,13 @@
   "description": "TeamWork is an internal social network for employees of an organization. The goal of this",
   "main": "index.js",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "dotenv": "^8.2.0",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^8.5.1",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-validator": "^6.4.0",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^7.18.2"
   },
   "devDependencies": {

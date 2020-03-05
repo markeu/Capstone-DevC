@@ -1,8 +1,7 @@
 import { Pool } from 'pg';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 
 
-dotenv.config();
 const pool = new Pool({
   connectionString: process.env.POSTGRES_DB_URL,
 });

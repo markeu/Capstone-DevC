@@ -40,7 +40,7 @@ class Authenticate {
     try {
       const { headers: { authorization } } = req;
       if (authorization === undefined) throw new Error('no auth');
-      const token = authorization.split(' ')[0];
+      const token = authorization.split(' ')[1];
       if (!token || token === '') {
         return errorResponse(res, 401, 'Access denied');
       }

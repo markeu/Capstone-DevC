@@ -1,15 +1,20 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
+import expressFileUpload from 'express-fileupload';
 import 'dotenv/config';
 
 import apiRoutes from './routes';
 
+
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressFileUpload({
+  createParentPath: true
+}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 app.get('/', (req, res) => {
   res.status(200).send({

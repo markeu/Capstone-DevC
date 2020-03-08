@@ -15,7 +15,7 @@ export const createItem = async (table, data) => {
 	};
 	
 	try {
-		const { rows } = await pool.query(query);
+		const { rows } = await pool.query(query)
 		return { error: null, result: rows[0] };
 	} catch (error) {
 		return { error: error.message, result: null };

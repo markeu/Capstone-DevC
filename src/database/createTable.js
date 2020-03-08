@@ -21,7 +21,7 @@ const tablesQuerry = `
 
     CREATE TABLE IF NOT EXISTS
       articles(
-        "id" UUID PRIMARY KEY,
+        "id" VARCHAR(128) PRIMARY KEY,
         "ownerId" VARCHAR(128) NOT NULL REFERENCES users(id),
         "title" VARCHAR(128) NOT NULL,
         "article" TEXT NOT NULL,

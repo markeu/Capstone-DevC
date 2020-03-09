@@ -131,5 +131,45 @@ export default class ArticleController {
       return errorResponse(res, 500, 'Internal server error');
     }
   }
-  
+
+  /**
+  * @method getArticles
+  * @description - method to get all articles
+  * @param {object} req - request object
+  * @param {object} res - response object
+  * @return {object} request response body
+  */
+  static async getArticles(req, res) {
+    try {
+      const { error, result: articles } = await getItems('articles');
+      if (!error) {
+        return successResponseArray(res, 200, articles);
+      }
+      return errorResponse(res, 500, 'Server error getting items');
+    } catch (error) {
+      return errorResponse(res, 500, 'Internal server error');
+    }
+  }
+
+  /**
+* @method getArticle
+* @description - method to get all articles
+* @param {object} req - request object
+* @param {object} res - response object
+* @return {object} request response body
+*/
+  static async getArticle(req, res) {
+    try {
+      const { id } = req.params;
+      const { error, result: articleItem } = await getItem('articles', { id });
+      const { result: commentArr } = await getItem('comments', { postId: id });
+      if (!error) {
+        const response = { ...articleItem, comments: commentArr };
+        return successResponse(res, 200, response);
+      }
+      return errorResponse(res, 500, 'Internal error fetching article');
+    } catch (error) {
+      return errorResponse(res, 500, 'Internal server error');
+    }
+  }
 }

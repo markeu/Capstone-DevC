@@ -5,11 +5,15 @@ import { ArticleController } from '../../controllers';
 
 const { verifyToken } = Authenticate;
 const {
-  createArticle
+  createArticle, editArticle, deleteItem
 } = ArticleController;
 
 const router = express.Router();
 
-router.post('/', multerUploads, verifyToken, createArticle);
+router.post('/', validate('createArticle'), verifyToken, createArticle);
+
+router.patch('/:id', validate('createArticle'), verifyToken, editArticle);
+
+router.delete('/:id', verifyToken, deleteItem);
 
 export default router;

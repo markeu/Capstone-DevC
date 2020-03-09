@@ -39,3 +39,13 @@ export const loginUser = [
     .withMessage('Provide your password')
     .trim()
 ];
+
+export const createArticle = [
+  body('title').not().isEmpty().isString()
+    .withMessage('Provide a title for article')
+    .trim(),
+  body('article').not().isEmpty().isString()
+    .withMessage('Provide a title for article')
+    .trim(),
+  body('share').optional().isBoolean().withMessage('Share should be true or false else default to true')
+];

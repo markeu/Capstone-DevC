@@ -44,4 +44,51 @@ export default class gifsController {
       return errorResponse(res, 500, 'Internal server error');
     }
   }
+
+  /**
+* @method getgif
+* @description - method to get all articles
+* @param {object} req - request object
+* @param {object} res - response object
+* @return {object} request response body
+*/
+  static async getGif(req, res) {
+    try {
+      const { id } = req.params;
+      const { error, result: gifItem } = await getItem('gifs', { id });
+      const { result: commentArr } = await getItems('comments', { postId: id });
+      if (!error) {
+        const response = { ...gifItem, comment: commentArr };
+        return successResponse(res, 200, 'Gifs created successfully', response);
+      }
+      return errorResponse(res, 500, 'Server error');
+    } catch (error) {
+      return errorResponse(res, 500, 'Internal server error');
+    }
+  }
+
+  /**
+  * @method deleteGif
+  * @description - method for users to delete an existing gif
+  * @param {object} req - request object
+  * @param {object} res - response object
+  * @return {object} request response body
+  */
+  static async deleteGif(req, res) {
+    try {
+      const { userId } = req.user;
+      const { id: gifId } = req.params;
+      const { result: gifItem } = await getItem('gifs', { id: gifId });
+ 
+      if (!gifItem) return errorResponse(res, 404, 'Gif not found');
+      if (gifItem.ownerId !== userId) {
+        return errorResponse(res, 403, 'Not allowed');
+      }
+      const { result: deleteGif } = await deleteItem('gifs', gifId);
+      if (deleteGif) return successResponse(res, 200, 'Gif deleted successfully');
+      return errorResponse(res, 500, 'Server error');
+    } catch (error) {
+      return errorResponse(res, 500, 'Internal server error');
+    }
+  }
 }

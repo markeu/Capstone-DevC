@@ -2,5 +2,8 @@
 import UserController from './UserController';
 import ArticleController from './ArticleController';
 import GifController from './GifController';
+import FeedController from './Feedcontroller';
 
-export { UserController, ArticleController, GifController };
+export {
+  UserController, ArticleController, GifController, FeedController
+};

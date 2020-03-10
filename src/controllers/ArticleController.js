@@ -1,5 +1,5 @@
 import {
-  errorResponse, successResponse, hashPassword, generateToken, successResponseArray
+  errorResponse, successResponse, successResponseArray
 } from '../utiities';
   
 import {

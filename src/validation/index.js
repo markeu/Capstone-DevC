@@ -1,12 +1,13 @@
 /* eslint-disable import/prefer-default-export */
-import { userRegister, loginUser, createArticle, comment } from './rules';
+import { userRegister, loginUser, createArticle, comment, createGif } from './rules';
 
 export const validationFetch = (validationName) => {
   const rules = {
     userRegister,
     loginUser,
     createArticle,
-    comment
+    comment,
+    createGif
   };
 
   return rules[validationName];

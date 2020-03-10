@@ -43,7 +43,7 @@ const tablesQuerry = `
 
       CREATE TABLE IF NOT EXISTS
       gifs(
-        "id" UUID PRIMARY KEY,
+        "id" SERIAL PRIMARY KEY,
         "ownerId" VARCHAR(128) NOT NULL REFERENCES users(id),
         "title" VARCHAR(128) NOT NULL,
         "createdOn" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

@@ -5,9 +5,8 @@ import {
 import {
   createItem, getItem, getItems, updateItem, deleteItem
 } from '../database/query/helper';
-import { dataUri } from '../config/MulterUpload';
-// import { uploadCloudinary } from '../services';
-import { uploader } from '../config/CloudinaryConfig';
+import { uploadCloudinary } from '../services';
+
 
 /**
  * @class ArticleController
@@ -24,27 +23,19 @@ export default class ArticleController {
  */
   static async createArticle(req, res) {
     const {
-      title, article, id, share
+      title, article, share
     } = req.body;
   
     const { userId: ownerId, firstName, lastName } = req.user;
     
     let imgUrl;
-    // if (!(req.files && req.files.image)) {
-    //   const file = dataUri(req).content;
-    //   const { image_url: imageUrl } = await uploader.upload(file);
-    //   imgUrl = imageUrl;
-    // }
-    // console.log(req.files);
     if (req.files && req.files.image) {
       const { image } = req.files;
       const { secure_url: secureUrl } = await uploadCloudinary(image);
-      console.log('url:', secureUrl);
       imgUrl = secureUrl;
     }
     try {
       const { error, result: newArticle } = await createItem('articles', {
-        id,
         title,
         ownerId,
         share: share === 'false' ? share : true,
@@ -82,13 +73,12 @@ export default class ArticleController {
       
       let imgUrl;
       if (req.files && req.files.image) {
-        const file = dataUri(req).content;
-        const { image_url: imageUrl } = await uploader.upload(file);
-        imgUrl = imageUrl;
+        const { image } = req.files;
+        const { secure_url: secureUrl } = await uploadCloudinary(image);
+        imgUrl = secureUrl;
       }
      
       const { error, result: existingArticle } = await updateItem('articles', articleId, {
-        id: articleItem.id,
         title: title || articleItem.title,
         ownerId,
         share: share === 'false' ? share : true,
@@ -168,6 +158,43 @@ export default class ArticleController {
         return successResponse(res, 200, response);
       }
       return errorResponse(res, 500, 'Internal error fetching article');
+    } catch (error) {
+      return errorResponse(res, 500, 'Internal server error');
+    }
+  }
+
+  /**
+  * @method commentArticle
+  * @description - method for users to comment on an article
+  * @param {object} req - request object
+  * @param {object} res - response object
+  * @return {object} request response body
+  */
+  static async commentArticle(req, res) {
+    const { comment } = req.body;
+    const { id: articleId } = req.params;
+    const { userId: ownerId, firstName, lastName } = req.user;
+    try {
+      const { result: article } = await getItem('articles', { id: articleId });
+      if (!article) {
+        return errorResponse(res, 500, 'Article not found');
+      }
+      const { error, result: newComment } = await createItem('comments', {
+        comment,
+        ownerId,
+        authorName: `${firstName} ${lastName}`,
+        postId: articleId,
+      });
+      const response = {
+        ...newComment,
+        articleTitle: article.title,
+        article: article.article
+      };
+      
+      if (!error) {
+        return successResponse(res, 201, 'Comment succesfully created', response);
+      }
+      throw new Error(error);
     } catch (error) {
       return errorResponse(res, 500, 'Internal server error');
     }

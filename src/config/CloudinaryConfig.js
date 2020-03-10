@@ -1,16 +1,10 @@
-import dotenv from 'dotenv';
+import cloudinary from 'cloudinary';
+import 'dotenv/config';
 
-import { config, uploader } from 'cloudinary';
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 
-dotenv.config();
-
-const cloudinaryConfig = (req, res, next) => {
-  config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET,
-  });
-  next();
-};
-
-export { cloudinaryConfig, uploader };
+export default cloudinary;

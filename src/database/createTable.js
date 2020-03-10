@@ -21,7 +21,7 @@ const tablesQuerry = `
 
     CREATE TABLE IF NOT EXISTS
       articles(
-        "id" VARCHAR(128) PRIMARY KEY,
+        "id" SERIAL PRIMARY KEY,
         "ownerId" VARCHAR(128) NOT NULL REFERENCES users(id),
         "title" VARCHAR(128) NOT NULL,
         "article" TEXT NOT NULL,
@@ -33,7 +33,7 @@ const tablesQuerry = `
 
       CREATE TABLE IF NOT EXISTS
       comments(
-        "id" UUID PRIMARY KEY,
+        "id" SERIAL PRIMARY KEY,
         "ownerId" VARCHAR(128) NOT NULL REFERENCES users(id),
         "postId" VARCHAR(128) NOT NULL,
         "createdOn" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

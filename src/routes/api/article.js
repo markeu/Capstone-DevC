@@ -17,7 +17,7 @@ router.post('/', validate('createArticle'), verifyToken, createArticle);
 
 router.patch('/:id', validate('createArticle'), verifyToken, editArticle);
 
-router.post('/:id/comment', verifyToken, commentArticle);
+router.post('/:id/comment', validate('comment'), verifyToken, commentArticle);
 
 router.delete('/:id', verifyToken, deleteItem);
 

@@ -16,6 +16,7 @@
     "express-validator": "^6.4.0",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.2",
+    "nyc": "^15.0.0",
     "path": "^0.12.7",
     "pg": "^7.18.2",
     "promise-fs": "^2.1.1",
@@ -41,10 +42,11 @@
     "uuid": "^3.3.3"
   },
   "scripts": {
-    "test": "npm run drop-table &&  npm run create-table && npm run use-seed && mocha --recursive --require babel-register --require babel-polyfill src/test --exit",
+    "test": "npm run drop-table &&  npm run create-table && npm run use-seed && nyc --reporter=html --reporter=text mocha --recursive --require babel-register --require babel-polyfill src/test --exit",
     "start": "nodemon --exec babel-node src/app.js",
     "create-table": " babel-node src/database/createTable.js",
     "drop-table": " babel-node src/database/dropTable.js",
+    "coverage": "nyc report --reporter=text-lcov --reporter=lcov",
     "lint": "node_modules/.bin/eslint --fix src/**/*.js",
     "use-seed": "babel-node src/database/query/testSeed.js",
     "debug": "babel-node debug app.js"

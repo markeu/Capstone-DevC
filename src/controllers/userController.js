@@ -42,7 +42,6 @@ export default class UserController {
    */
   static async registerUser(req, res) {
     const {
-      id,
       firstName,
       lastName,
       email,
@@ -63,7 +62,6 @@ export default class UserController {
         return errorResponse(res, 409, 'user already exists');
       }
       const { error: createError, result: newUser } = await createItem('users', {
-        id,
         firstName,
         lastName,
         password: password ? hashPassword(password) : undefined,

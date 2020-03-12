@@ -4,7 +4,7 @@ import pool from './index';
 const tablesQuerry = `    
     CREATE TABLE IF NOT EXISTS 
     users(
-      "id" VARCHAR(128) PRIMARY KEY,
+      "id" SERIAL PRIMARY KEY,
       "firstName" VARCHAR(128) NOT NULL,
       "lastName" VARCHAR(128) NOT NULL,
       "email" VARCHAR(128) NOT NULL,
@@ -22,7 +22,7 @@ const tablesQuerry = `
     CREATE TABLE IF NOT EXISTS
       articles(
         "id" SERIAL PRIMARY KEY,
-        "ownerId" VARCHAR(128) NOT NULL REFERENCES users(id),
+        "ownerId" INT NOT NULL REFERENCES users(id),
         "title" VARCHAR(128) NOT NULL,
         "article" TEXT NOT NULL,
         "createdOn" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -34,7 +34,7 @@ const tablesQuerry = `
       CREATE TABLE IF NOT EXISTS
       comments(
         "id" SERIAL PRIMARY KEY,
-        "ownerId" VARCHAR(128) NOT NULL REFERENCES users(id),
+        "ownerId" INT NOT NULL REFERENCES users(id),
         "postId" VARCHAR(128) NOT NULL,
         "createdOn" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         "authorName" VARCHAR(128) NOT NULL,
@@ -44,7 +44,7 @@ const tablesQuerry = `
       CREATE TABLE IF NOT EXISTS
       gifs(
         "id" SERIAL PRIMARY KEY,
-        "ownerId" VARCHAR(128) NOT NULL REFERENCES users(id),
+        "ownerId" INT NOT NULL REFERENCES users(id),
         "title" VARCHAR(128) NOT NULL,
         "createdOn" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         "authorName" VARCHAR(128) NOT NULL,

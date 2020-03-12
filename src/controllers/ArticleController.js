@@ -88,7 +88,7 @@ export default class ArticleController {
       });
      
       if (!error) {
-        return successResponse(res, 200, 'Article succesfully updated', existingArticle);
+        return successResponse(res, 201, 'Article succesfully updated', existingArticle);
       }
       return errorResponse(res, 500, 'Server error');
     } catch (error) {
@@ -153,6 +153,7 @@ export default class ArticleController {
       const { id } = req.params;
       const { error, result: articleItem } = await getItem('articles', { id });
       const { result: commentArr } = await getItem('comments', { postId: id });
+      if (articleItem === null) errorResponse(res, 404, 'Article not found');
       if (!error) {
         const response = { ...articleItem, comments: commentArr };
         return successResponse(res, 200, response);

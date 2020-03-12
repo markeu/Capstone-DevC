@@ -60,5 +60,22 @@
   "bugs": {
     "url": "https://github.com/markeu/Capstone-DevC/issues"
   },
-  "homepage": "https://github.com/markeu/Capstone-DevC#readme"
+  "homepage": "https://github.com/markeu/Capstone-DevC#readme",
+  "nyc": {
+		"_comment": "Purpose of this part: to do code coverage within Mocha/Chai using NYC",
+		"register": "babel-register",
+		"include": [
+			"**/*.js",
+			"./*.js"
+		],
+		"exclude": [
+			"**/node_modules/**",
+			"**/coverage/**",
+			"**/.nyc_output/**",
+			"**src/database/migrations/**",
+			"**src/database/**",
+			"**/docs/**",
+			"**src/test/**"
+		]
+	}
 }

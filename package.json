@@ -48,7 +48,7 @@
     "start": "nodemon --exec babel-node src/app.js",
     "create-table": " babel-node src/database/createTable.js",
     "drop-table": " babel-node src/database/dropTable.js",
-    "coverage": "nyc report --reporter=text-lcov --reporter=lcov",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "node_modules/.bin/eslint --fix src/**/*.js",
     "use-seed": "babel-node src/database/query/testSeed.js",
     "debug": "babel-node debug app.js"

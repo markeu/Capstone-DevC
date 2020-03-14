@@ -32,11 +32,13 @@
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "coveralls": "^3.0.9",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",
     "faker": "^4.1.0",
     "mocha": "^7.1.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^2.0.2",
     "request": "^2.88.2",
     "uuid": "^3.3.3"
@@ -62,20 +64,20 @@
   },
   "homepage": "https://github.com/markeu/Capstone-DevC#readme",
   "nyc": {
-		"_comment": "Purpose of this part: to do code coverage within Mocha/Chai using NYC",
-		"register": "babel-register",
-		"include": [
-			"**/*.js",
-			"./*.js"
-		],
-		"exclude": [
-			"**/node_modules/**",
-			"**/coverage/**",
-			"**/.nyc_output/**",
-			"**src/database/migrations/**",
-			"**src/database/**",
-			"**/docs/**",
-			"**src/test/**"
-		]
-	}
+    "_comment": "Purpose of this part: to do code coverage within Mocha/Chai using NYC",
+    "register": "babel-register",
+    "include": [
+      "**/*.js",
+      "./*.js"
+    ],
+    "exclude": [
+      "**/node_modules/**",
+      "**/coverage/**",
+      "**/.nyc_output/**",
+      "**src/database/migrations/**",
+      "**src/database/**",
+      "**/docs/**",
+      "**src/test/**"
+    ]
+  }
 }

@@ -38,11 +38,8 @@ pool.query('SELECT MAX(id) from gifs', (err, result) => {
           .post('/api/v1/gif')
           .set('authorization', Bearertoken)
           .field('title', 'Testing my gifs')
-          .attach('image', fs.readFileSync('./src/test/assets/gif.png'), 'gif.png')
+          .attach('image', fs.readFileSync('./src/temp/gif.png'), 'gif.png')
           .end((err, res) => {
-            fs.unlink('./src/test/assets/gif.png', (err) => {
-              if (err) return err;
-            });
             expect(res).to.have.status(201);
             expect(res.body.data).to.be.an('object');
             expect(res.body).to.have.a.property('data');

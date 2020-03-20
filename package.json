@@ -69,7 +69,7 @@
   "homepage": "https://github.com/markeu/Capstone-DevC#readme",
   "nyc": {
     "_comment": "Purpose of this part: to do code coverage within Mocha/Chai using NYC",
-    "register": "babel-register",
+    "register": "babel/register",
     "include": [
       "**/*.js",
       "./*.js"
